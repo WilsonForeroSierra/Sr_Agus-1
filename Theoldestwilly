@@ -1,6 +1,6 @@
-package com.outlook.agusgamerHD1;
-import java.util.ArrayList;
+package com.gmail.theoldestwilly;
 
+import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -25,7 +25,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 /**
 *
-* @author AgustinGomez y TheOldestWilly
+* @author AgustinGomez y WilsonForero
 */
 public class Principal extends JavaPlugin implements Listener{
 
@@ -142,7 +142,7 @@ public class Principal extends JavaPlugin implements Listener{
       }
       if ((cmd.getName().equalsIgnoreCase("Eventstart")) &&
       (sender.hasPermission("Eventplugs.Eventstart")))
-    {
+      {
       final Player p = (Player)sender;
       if ((!contadorempezado)&&(!eventoempezado))
       {
@@ -164,46 +164,53 @@ public class Principal extends JavaPlugin implements Listener{
             }
             else
             {
+            	if (jugadores.size()>1){
             
-            	eventoempezado=true;
-            	System.out.println("Empezo ya? "+eventoempezado);
-              Bukkit.broadcastMessage("§0[§4§lEventplugs§0]: §8Teletransportando a los participantes.");
-              cancel();
-              Bukkit.broadcastMessage("§0[§4§lEventplugs§0]: §8Evento iniciado! Suerte para todos!");
-              Principal.contador = 60;
-              for (int i = 0; i < Principal.jugadores.size(); i++) {
-                try
-                {
-                  Player Participantes1 = (Player)Principal.jugadores.get(i);
-                  System.out.println(Principal.jugadores);
-                  
-                  int x = getConfig().getInt("Spawn.x");
-                  int y = getConfig().getInt("Spawn.y");
-                  int z = getConfig().getInt("Spawn.z");
-                  String mundo = getConfig().getString("Spawn.world");
-                  Location l = new Location(Bukkit.getWorld(mundo),x,y,z);
-                  Participantes1.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 100000, 1));
-                  System.out.println("Se esta tpeando a :" + l);
-                  Participantes1.teleport(l);
-                  Participantes1.setHealth(20);
-                  Participantes1.setFoodLevel(20);
-                  p.sendMessage("§8Has sido Teletransportado. Bienvenido a la arena");
-                }
-                catch (Exception e)
-                {
-                  System.out.println(e);
-                }
+	            	eventoempezado=true;
+	            	System.out.println("Empezo ya? "+eventoempezado);
+	              Bukkit.broadcastMessage("§0[§4§lEventplugs§0]: §8Teletransportando a los participantes.");
+	              cancel();
+	              Bukkit.broadcastMessage("§0[§4§lEventplugs§0]: §8Evento iniciado! Suerte para todos!");
+	              Principal.contador = 60;
+	              for (int i = 0; i < Principal.jugadores.size(); i++) {
+	                try
+	                {
+	                  Player Participantes1 = (Player)Principal.jugadores.get(i);
+	                  System.out.println(Principal.jugadores);
+	                  
+	                  int x = getConfig().getInt("Spawn.x");
+	                  int y = getConfig().getInt("Spawn.y");
+	                  int z = getConfig().getInt("Spawn.z");
+	                  String mundo = getConfig().getString("Spawn.world");
+	                  Location l = new Location(Bukkit.getWorld(mundo),x,y,z);
+	                  Participantes1.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 100000, 1));
+	                  System.out.println("Se esta tpeando a :" + l);
+	                  Participantes1.teleport(l);
+	                  Participantes1.setHealth(20);
+	                  Participantes1.setFoodLevel(20);
+	                  p.sendMessage("§8Has sido Teletransportado. Bienvenido a la arena");
+	                }
+	                catch (Exception e)
+	                {
+	                  System.out.println(e);
+	                }
               }
-              Bukkit.getScheduler().runTaskLater(Principal.instance, new Runnable()
-              {
-                public void run()
-                {
+              //Bukkit.getScheduler().runTaskLater(Principal.instance, new Runnable()
+              //{
+                //public void run()
+                //{
                   contadorempezado = false;
-                }
-              }, 20L);
+                //}
+              //}, 20L);
+            }else{
+            	eventoempezado=false;
+            	Bukkit.broadcastMessage("§4§lError: §8No se ha iniciado el evento por numero insuficiente de jugadores");
+            	this.cancel();
             }
           }
+          } 
         }.runTaskTimer(instance, 20L, 20L);
+        
       }
       else
       {
