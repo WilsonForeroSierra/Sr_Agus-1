@@ -1,6 +1,7 @@
 package com.outlook.agusgamerHD1;
 
 
+
 import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -260,7 +261,7 @@ public class Principal extends JavaPlugin implements Listener{
 	    	if (eventoempezado==true){
 		    	System.out.println("Lo que necesito al inicio es esto "+jugadores.size());
 		    	Player player = event.getEntity();
-		    	if ((jugadores.contains(player))&&(jugadores.size()>0)){
+		    	if ((jugadores.contains(player))&&(jugadores.size()>=2)){
 				    System.out.println("Pasa");
 				    Bukkit.broadcastMessage("Testing ha sido matado por "+player.getKiller().getName());
 				    Bukkit.broadcastMessage("§a "+player.getName()+"  ha sido matado por "+player.getKiller().getName());//For debug purposes
